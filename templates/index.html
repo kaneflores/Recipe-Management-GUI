@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Cooks' Database</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>The Cooks' Database</h1>
+  </header>
+
+  <section id="login-section">
+    <h2>Login</h2>
+    <form id="login-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      
+      <button type="button" id="login-button">Login</button>
+    </form>
+    <button id="create-account-nav">Create Account</button>
+  </section>
+  
+  
+<section id="create-account-section" style="display: none;">
+  <h2>Create Account</h2>
+  <form id="create-account-form">
+    <label for="new-username">Username:</label>
+    <input type="text" id="new-username" name="new-username" required>
+    
+    <label for="new-password">Password:</label>
+    <input type="password" id="new-password" name="new-password" required>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    
+    <button type="button" id="create-account-button">Create Account</button>
+  </form>
+  
+  <button id="back-to-login">Back to Login</button>
+</section>
+
+
+  <section id="content-section" style="display: none;">
+    <h2>Welcome, <span id="user-name"></span>!</h2>
+    <p>Select a meal type or search for a recipe:</p>
+    
+  <div id="categories">
+    <button class="category-button">Breakfast</button>
+    <button class="category-button">Lunch</button>
+    <button class="category-button">Dinner</button>
+  </div>
+
+   
+    <div id="search-bar">
+      <label for="search-input">Search for a recipe:</label>
+      <input type="text" id="search-input" placeholder="Enter recipe name or cuisine">
+      <button id="search-button">Search</button>
+    </div>
+    
+    <div id="extra-buttons">
+      <button id="favorited-recipes-button">Favorited Recipes</button>
+      <button id="shopping-list-button">Shopping List</button>
+      <button id="upload-recipe-nav">Upload Recipe</button>
+      <button id="logout-button">Logout</button>
+    </div>
+
+    <div id="advanced-search-container">
+      <button id="advanced-search-button">Advanced Search</button>
+      <div id="advanced-search-panel" style="display: none;">
+          <h3>Search by Nutrition Facts</h3>
+          <form id="nutrition-search-form">
+              <label for="min-protein">Protein (min):</label>
+              <input type="number" id="min-protein" placeholder="0">
+              <label for="max-protein">Protein (max):</label>
+              <input type="number" id="max-protein" placeholder="100">
+    
+              <label for="min-fat">Fat (min):</label>
+              <input type="number" id="min-fat" placeholder="0">
+              <label for="max-fat">Fat (max):</label>
+              <input type="number" id="max-fat" placeholder="100">
+    
+              <label for="min-carbs">Carbs (min):</label>
+              <input type="number" id="min-carbs" placeholder="0">
+              <label for="max-carbs">Carbs (max):</label>
+              <input type="number" id="max-carbs" placeholder="100">
+    
+              <label for="min-calories">Calories (min):</label>
+              <input type="number" id="min-calories" placeholder="0">
+              <label for="max-calories">Calories (max):</label>
+              <input type="number" id="max-calories" placeholder="1000">
+    
+              <button type="button" id="nutrition-search-button">Search</button>
+          </form>
+      </div>
+    </div>
+
+    
+  </section>
+  
+  
+  <section id="shopping-list-section" style="display: none;">
+    <h2>Your Shopping List</h2>
+    <div id="recipe-list"></div>
+    <button id="back-to-main">Home</button>
+  </section>
+  
+  
+<section id="meal-recipes-section" style="display: none;">
+  <h2 id="meal-type-title">Recipes</h2>
+  <div id="meal-recipe-list">
+  </div>
+  <button id="back-to-main-recipes">Back</button>
+</section>
+
+<section id="recipe-details-section" style="display: none;">
+  <h2 id="recipe-title">Recipe Title</h2>
+  
+  <div id="recipe-content">
+    <h3>Cooking Time</h3>
+    <p id="recipe-cooking-time">Cooking Time: -- minutes</p>
+    
+    <h3>Ingredients</h3>
+    <ul id="recipe-ingredients">
+    </ul>
+
+    <h3>Nutrition Facts</h3>
+    <ul id="recipe-nutrition">
+    </ul>
+  </div>
+
+  <button id="favorite-button">Add to Favorites</button>
+  
+  <button id="view-comments-button">View Comments</button>
+
+  <button id="back-to-category">Back to Recipes</button>
+</section>
+
+<section id="favorite-recipe-details-section" style="display: none;">
+  <h2 id="favorite-recipe-title">Recipe Title</h2>
+  
+  <div id="recipe-content">
+    <h3>Cooking Time</h3>
+    <p id="favorite-recipe-cooking-time">Cooking Time: -- minutes</p>
+    
+    <h3>Ingredients</h3>
+    <ul id="favorite-recipe-ingredients"></ul>
+    </ul>
+
+    <h3>Nutrition Facts</h3>
+    <ul id="favorite-recipe-nutrition"></ul>
+    </ul>
+  </div>
+
+  <button id="favorite-button">Add to Favorites</button>
+  
+  <button id="view-comments-button">View Comments</button>
+
+  <button id="back-to-favorites">Back to Recipes</button>
+</section>
+  
+<section id="favorited-recipes-section" style="display: none;">
+  <h2>Your Favorited Recipes</h2>
+  <div id="favorited-recipes-list">
+  </div>
+  <button id="back-to-main-favorites">Back</button>
+</section>
+
+<section id="upload-recipe-section" style="display: none;">
+  <h2>Upload Your Recipe</h2>
+  <form id="upload-recipe-form">
+      <label for="recipe-name">Recipe Name:</label>
+      <input type="text" id="recipe-name" name="recipe-name" required>
+      
+      <label for="cooking-time">Cooking Time (in minutes):</label>
+      <input type="number" id="cooking-time" name="cooking-time">
+      
+      <div id="ingredients-list">
+          <h3>Ingredients</h3>
+          <div class="ingredient-item">
+              <input type="text" class="ingredient-name" placeholder="Ingredient Name" required>
+              <input type="text" class="ingredient-amount" placeholder="Amount" required>
+          </div>
+      </div>
+      <button type="button" id="add-ingredient">Add Ingredient</button>
+      
+      <h3>Nutrition Facts (Optional)</h3>
+      <label for="protein">Protein (g):</label>
+      <input type="number" id="protein" name="protein">
+      
+      <label for="fat">Fat (g):</label>
+      <input type="number" id="fat" name="fat">
+      
+      <label for="carbs">Carbs (g):</label>
+      <input type="number" id="carbs" name="carbs">
+      
+      <label for="calories">Calories:</label>
+      <input type="number" id="calories" name="calories">
+      
+      <button type="button" id="upload-recipe-button">Upload Recipe</button>
+  </form>
+  <button id="back-to-main-upload">Back to Home</button>
+</section>
+
+<section id="comments-section" style="display: none;">
+  <h2>Comments for <span id="comments-recipe-title"></span></h2>
+  <div id="comments-list">
+  </div>
+  <button id="create-comment-button">Add a Comment</button>
+
+  <div id="create-comment-form" style="display: none;">
+      <h3>Add Your Comment</h3>
+      <label for="comment-rating">Rating (1-5):</label>
+      <input type="number" id="comment-rating" min="1" max="5" required>
+      
+      <label for="comment-text">Comment:</label>
+      <textarea id="comment-text" rows="3" required></textarea>
+      
+      <button id="submit-comment-button">Submit Comment</button>
+  </div>
+  
+  <button id="back-to-recipe">Back to Recipe</button>
+</section>
+
+
+
+  <footer>
+    <p>&copy; 2024 The Cooks' Database</p>
+  </footer>
+
+  <script src="static\js\script.js"></script>
+</body>
+</html>
